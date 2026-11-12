@@ -1,0 +1,26 @@
+name: Compilar Fear City APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-android-apk:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clonar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Compilar APK único com Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
+        with:
+          command: buildozer android debug
+          buildozer_version: master
+
+      - name: Publicar arquivo .APK pronto para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: FearCity_DiceEngine_APK
+          path: ${{ steps.buildozer.outputs.filename }}
