@@ -1,0 +1,14 @@
+COMPILAR O APK (GitHub Actions, sem instalar nada)
+
+1. Crie um repositorio PRIVADO no GitHub (main.py contem a URL do webhook do Discord).
+2. Nesta pasta:
+   git init
+   git add .
+   git commit -m "fear city apk"
+   git branch -M main
+   git remote add origin <URL_DO_SEU_REPOSITORIO>
+   git push -u origin main
+3. GitHub > aba Actions > "Compilar Fear City APK" (o push ja dispara; ou Run workflow).
+   Primeira execucao: 20 a 40 min (baixa Android SDK/NDK).
+4. Ao terminar, abra a execucao e baixe o artefato "FearCity_DiceEngine_APK" (zip com o .apk).
+5. No Android: copie o .apk, permita "instalar apps desconhecidos" e instale.

@@ -1,0 +1,104 @@
+================================================================================
+WELCOME TO FEAR CITY — GUIA COMPLETO DE COMANDOS DO CONSOLE
+Sistema Híbrido V3/V20 + V5 (Dados da Loucura)
+================================================================================
+
+Todos os comandos abaixo devem ser digitados na caixa de comando (canto inferior
+direito do Painel de Rolagem) seguidos da tecla ENTER.
+
+--------------------------------------------------------------------------------
+1. COMANDO !roll (ROLAGEM DE DADOS)
+--------------------------------------------------------------------------------
+O comando !roll possui 4 modos de operação, do mais simples ao sistema híbrido
+completo com Dados da Loucura e Força de Vontade:
+
+A) Rolagem Simples (sem dificuldade):
+   Sintaxe : !roll <Quantidade>d<Faces>
+   Exemplo : !roll 4d10
+             !roll 2d6
+             !roll 1d4
+   Efeito  : Rola os dados solicitados e retorna o conjunto simples { x, y, z }.
+
+B) Rolagem Clássica com Dificuldade (Motor V20):
+   Sintaxe : !roll <Quantidade>d<Faces> <Dificuldade>
+   Exemplo : !roll 5d10 6
+   Efeito  : Rola 5 dados de 10 faces contra Dificuldade 6.
+             - Verde   : Sucesso (valor >= Dificuldade)
+             - Vermelho: Falha comum (valor < Dificuldade)
+             - Amarelo : Falha Crítica (valor = 1, subtrai 1 sucesso)
+             Exibe o total de sucessos brutos, falhas críticas e o saldo líquido.
+
+C) Rolagem Híbrida com Dados da Loucura (FV Ativa por padrão):
+   Sintaxe : !roll <Pool_Total>d10 <Dificuldade> <Qtd_Dados_Loucura>
+   Exemplo : !roll 6d10 6 2
+   Efeito  : Rola 6d10 no total (sendo 4 dados normais e 2 Dados da Loucura entre
+             colchetes [ ]) contra Dificuldade 6, assumindo FV >= 1.
+             - [10★] (Ciano)  : Crítico Limpo (FV conteve a Besta).
+             - [1⚠]  (Amarelo): Risco de Falha Bestial se o saldo líquido for 0.
+
+D) Rolagem Híbrida com Dados da Loucura e Força de Vontade explícita:
+   Sintaxe : !roll <Pool_Total>d10 <Dificuldade> <Qtd_Dados_Loucura> <FV_Atual>
+   Exemplo : !roll 6d10 6 2 0
+   Efeito  : Rola 6d10 (4 normais + 2 de Loucura) contra Dificuldade 6 com FV = 0
+             (escudo mental quebrado).
+             - [10☠] (Magenta): CRÍTICO BESTIAL (Sucesso com manifestação violenta
+                                da Besta ou quebra da Máscara).
+             - [1⚠]  (Amarelo): FALHA BESTIAL se a ação falhar (ativa Compulsão
+                                ou penalidade de -2 dados).
+
+--------------------------------------------------------------------------------
+2. COMANDO !loucura (TESTE ISOLADO DE DEGRADAÇÃO / LOUCURA)
+--------------------------------------------------------------------------------
+Avalia e rola diretamente os Dados da Loucura com base na porcentagem de sangue
+(0 a 100%) ou diretamente pelo nível de Fome (0 a 5):
+
+   Sintaxe : !loucura <Sangue_%_ou_Fome_0_a_5> [FV_Atual]
+   Exemplos: !loucura 45 3   (45% de sangue = 3 Dados da Loucura, com FV = 3)
+             !loucura 25 0   (25% de sangue = 4 Dados da Loucura, com FV = 0)
+             !loucura 3 1    (Fome 3 = 3 Dados da Loucura, com FV = 1)
+
+   Escala de Conversão Automática:
+   - 90% a 100% (ou Fome 0) -> 0 Dados (Plenitude)
+   - 70% a 89%  (ou Fome 1) -> 1 Dado  (Murmúrio da Besta)
+   - 50% a 69%  (ou Fome 2) -> 2 Dados (Foco Predatório)
+   - 30% a 49%  (ou Fome 3) -> 3 Dados (Instinto Supre a Razão)
+   - 10% a 29%  (ou Fome 4) -> 4 Dados (Urgência de Sangue)
+   - < 10%      (ou Fome 5) -> 5 Dados (Iminência de Frenesi)
+
+--------------------------------------------------------------------------------
+3. COMANDO !dano (CALCULADORA DE MITIGAÇÃO E FORTITUDE)
+--------------------------------------------------------------------------------
+Calcula o dano final aplicado à trilha de Vitalidade sem precisar tirar a mão
+do teclado:
+
+   Sintaxe : !dano <sup|agr> <Dano_Bruto> <Fortitude>
+   Exemplos: !dano sup 7 2   (Dano Superficial: 7 / 2 arredondado para cima = 4;
+                              menos 2 de Fortitude = 2 níveis de dano final)
+             !dano agr 5 3   (Dano Agravado: 5 integral; menos 3 de Fortitude =
+                              2 níveis de dano final)
+
+--------------------------------------------------------------------------------
+4. COMANDOS DE TESTES RÁPIDOS (!despertar, !remorso, !moeda)
+--------------------------------------------------------------------------------
+A) Teste do Despertar (Rouse Check):
+   Sintaxe : !despertar   (ou !rouse)
+   Efeito  : Rola 1d10 contra Dificuldade 6. Resultado >= 6 mantém a Fome;
+             resultado de 1 a 5 aumenta a Fome em +1.
+
+B) Teste de Remorso (Contenção de Manchas na Humanidade):
+   Sintaxe : !remorso <Quantidade_de_Dados>
+   Exemplo : !remorso 3
+   Efeito  : Rola a quantidade informada de d10 (Dificuldade 6). Basta 1 sucesso
+             para limpar as Manchas (Stains) e preservar a Humanidade.
+
+C) Moeda Binária ("Alea Jacta Est"):
+   Sintaxe : !moeda       (ou !caracoroa)
+   Efeito  : Sorteia instantaneamente entre [Cara] e [Coroa].
+
+--------------------------------------------------------------------------------
+5. COMANDOS UTILITÁRIOS DO SISTEMA
+--------------------------------------------------------------------------------
+   !ajuda  (ou !help)  -> Exibe a lista resumida de sintaxes na tela de resultados.
+   !limpar (ou !clear) -> Apaga todo o texto acumulado na caixa de resultados.
+   !sair   (ou !exit)  -> Fecha o programa imediatamente.
+================================================================================
